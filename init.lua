@@ -10,8 +10,8 @@ local defaults = {
   snippetsPath = os.getenv("HOME") .. "/.config/hs-llm-hotkeys/snippets.json",
   hotkeys = {
     translate = { { "ctrl" }, "i" },
-    searchSnippets = { { "ctrl" }, ";" },
-    registerSnippet = { { "ctrl", "shift" }, ";" },
+    searchSnippets = { { "ctrl" }, "o" },
+    registerSnippet = { { "ctrl", "shift" }, "o" },
   },
 }
 

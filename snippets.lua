@@ -26,7 +26,7 @@ local chooser
 local function choices()
   local list = {}
   for i, item in ipairs(load()) do
-    list[#list + 1] = { text = item.name, subText = preview(item.content), index = i }
+    list[#list + 1] = { text = item.title, subText = preview(item.content), index = i }
   end
   return list
 end
@@ -35,7 +35,7 @@ local function remove(index)
   local items = load()
   local item = items[index]
   if not item then return end
-  local button = hs.dialog.blockAlert("「" .. item.name .. "」を削除しますか？", "", "削除", "キャンセル")
+  local button = hs.dialog.blockAlert("「" .. item.title .. "」を削除しますか？", "", "削除", "キャンセル")
   if button ~= "削除" then return end
   table.remove(items, index)
   save(items)
@@ -50,7 +50,7 @@ function M.setup(config)
     -- shift+Enter はコピーだけにして、貼り付け先を後から選べるようにする
     if hs.eventtap.checkKeyboardModifiers().shift then
       hs.pasteboard.setContents(item.content)
-      hs.alert.show("コピーしました: " .. item.name)
+      hs.alert.show("コピーしました: " .. item.title)
     else
       -- chooser が閉じて元のアプリにフォーカスが戻るのを待ってから貼り付ける
       hs.timer.doAfter(0.1, function() selection.paste(item.content) end)
@@ -83,18 +83,18 @@ function M.register()
   local summary = preview(content)
   local cut = utf8.offset(summary, 31)
   hs.focus()
-  local button, name = hs.dialog.textPrompt(
+  local button, title = hs.dialog.textPrompt(
     "スニペットを登録", summary, cut and summary:sub(1, cut - 1) or summary, "登録", "キャンセル")
   if button ~= "登録" then return end
-  name = name:gsub("^%s+", ""):gsub("%s+$", "")
-  if name == "" then
-    hs.alert.show("名前が空のため登録しませんでした")
+  title = title:gsub("^%s+", ""):gsub("%s+$", "")
+  if title == "" then
+    hs.alert.show("タイトルが空のため登録しませんでした")
     return
   end
   local items = load()
-  items[#items + 1] = { name = name, content = content }
+  items[#items + 1] = { title = title, content = content }
   save(items)
-  hs.alert.show("登録しました: " .. name)
+  hs.alert.show("登録しました: " .. title)
 end
 
 function M.openFile()
