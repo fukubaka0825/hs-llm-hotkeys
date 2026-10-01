@@ -39,7 +39,7 @@ function M.start(userConfig)
   M.menu:setMenu({
     { title = "選択テキストを翻訳", fn = function() translate.run(config) end },
     { title = "スニペットを検索", fn = snippets.search },
-    { title = "選択テキスト／クリップボードをスニペット登録", fn = snippets.register },
+    { title = "スニペットを登録", fn = snippets.register },
     { title = "snippets.json を開く", fn = snippets.openFile },
     { title = "-" },
     { title = "設定を再読み込み", fn = hs.reload },
