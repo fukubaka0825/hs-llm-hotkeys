@@ -14,6 +14,8 @@ Hammerspoon で動く、OpenAI API (BYOK) を使った選択テキスト翻訳�
 
 ```sh
 brew install --cask hammerspoon
+git clone https://github.com/fukubaka0825/hs-llm-hotkeys.git
+cd hs-llm-hotkeys
 ./install.sh
 # OpenAI API キーをキーチェーンに保存（プロンプトで入力）
 security add-generic-password -s hs-llm-hotkeys -a openai -w
@@ -35,3 +37,17 @@ require("hs-llm-hotkeys").start({
 ```
 
 スニペットは `snippetsPath` の JSON（`[{ "title": ..., "content": ... }]`）に保存される。
+
+## データの取り扱いと料金
+
+- 翻訳を実行すると、選択したテキストを OpenAI API に送信する。
+- OpenAI API キーは macOS のキーチェーンに保存し、API 利用料金は各自の OpenAI アカウントに課金される。
+- スニペットはローカルの JSON ファイルに保存する。スニペットの検索・登録・貼り付けでは OpenAI API に送信しない。
+
+## 運用方針
+
+個人用ツールとして公開している。外部からの Pull Request と Issues は受け付けていない。
+
+## ライセンス
+
+[MIT License](LICENSE)
